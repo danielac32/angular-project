@@ -41,7 +41,11 @@ export class AuthService {
     }
     return !!token;
   }
-
-
+  
+  getUserName(): string{
+    const user = localStorage.getItem('userCurrent');
+    if(!user) return "";
+    return user;
+  }
   
 }

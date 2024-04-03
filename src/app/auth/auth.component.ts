@@ -1,16 +1,16 @@
 import { Component , OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators ,ReactiveFormsModule/*,FormsModule*/} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import  {User} from './auth-login.interface';
 import { Router } from '@angular/router';
 //import { DataService } from '../shared/service';
-
+import { CommonModule } from '@angular/common'; 
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule,CommonModule/*,FormsModule*/],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css',
   providers: [AuthService]
@@ -20,6 +20,8 @@ import { Router } from '@angular/router';
 export class AuthComponent implements OnInit {
 loginForm: FormGroup;
 public isLoggedIn: boolean = false;
+email: string = '';
+
 
   constructor(private formBuilder: FormBuilder,private authService: AuthService,private router: Router,/*private dataService: DataService*/) {
     this.loginForm = this.formBuilder.group({
@@ -41,6 +43,7 @@ public isLoggedIn: boolean = false;
           if (response.status===200) {
               console.log(response.user);
               localStorage.setItem('accessToken', response.token);
+              localStorage.setItem('userCurrent', response.user.name);
               this.router.navigate(['/dashboard']);
           }
        }, error => {
@@ -51,7 +54,6 @@ public isLoggedIn: boolean = false;
        
     }
 }
-
 
 
 

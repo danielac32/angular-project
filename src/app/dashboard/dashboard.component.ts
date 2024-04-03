@@ -19,10 +19,11 @@ import { AuthService } from '../auth/auth.service';
 })
 export class DashboardComponent implements OnInit {
   sharedData: any;
+  userName: string = '';
   constructor(private router: Router,private authService: AuthService/*,private dataService: DataService*/) {}
 
 	ngOnInit(): void {
-
+    this.userName = this.authService.getUserName();
 	}
 
  logout(): void {

@@ -1,0 +1,15 @@
+.dashboard-layout {
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en columna */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+.sidebar {
+  border-right: 1px solid #ccc; /* Borde derecho de la barra de navegación */
+  padding: 20px;
+}
+
+.content {
+  flex: 1; /* El contenido ocupará todo el espacio restante */
+  padding: 20px;
+}
