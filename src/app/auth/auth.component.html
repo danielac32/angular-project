@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <form style="width: 300px;" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <input type="email"  formControlName="email" required  placeholder="Correo electrónico">
+  <input type="password"  formControlName="password" required placeholder="Contraseña">
+  <button type="submit">Iniciar sesión</button>
+  </form>
+</div>

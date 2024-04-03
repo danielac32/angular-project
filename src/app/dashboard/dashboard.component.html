@@ -1,0 +1,26 @@
+<div class="dashboard-layout">
+  <!-- Barra de navegación -->
+<div class="sidebar">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/dashboard/home">Inicio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/dashboard/profile">Perfil</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Reservaciones</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="" (click)="logout()">Salir</a>
+    </li>
+    <!-- Otros enlaces de navegación -->
+  </ul>
+</div>
+
+
+  <!-- Área de contenido -->
+  <div class="content">
+    <router-outlet></router-outlet> <!-- Aquí se cargarán los componentes hijos -->
+  </div>
+</div>
