@@ -3,13 +3,10 @@
   <div class="sidebar">
     <ul class="nav flex-column"> <!-- Añade la clase 'flex-column' para mostrar la lista verticalmente -->
       <li class="nav-item">
-        <a class="nav-link text-dark" >Reservaciones</a>
+        <a class="nav-link text-dark" routerLink="/dashboard/reservations/reservations">Reservaciones</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" >Crear Reservacion</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" >Buscar Reservacion</a>
+        <a class="nav-link text-dark" routerLink="/dashboard/reservations/create">Crear Reservacion</a>
       </li>
       <!-- Otros enlaces de navegación -->
     </ul>
@@ -17,6 +14,6 @@
 
   <!-- Área de contenido -->
   <div class="content">
-    
+    <router-outlet></router-outlet> <!-- Aquí se cargarán los componentes hijos -->
   </div>
 </div>

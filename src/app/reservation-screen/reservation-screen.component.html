@@ -1,0 +1,14 @@
+@if (reservation) {
+    <div>
+        <h1>{{ reservation.descripcion }}</h1>
+        <h3>Status: {{ reservation.state }}</h3>
+        <h3>Salon: {{ reservation.salonId }}</h3>
+        <h4>Fecha de inicio: {{ reservation.startDate }}</h4>
+        <h4>Fecha de finalizacion: {{ reservation.endDate }}</h4>
+        <p>{{reservation.descripcion}}</p>
+
+        <button (click)="changeStatusInReservation(reservation.id, 'accepted')" class="btn btn-primary">Aceptar</button>
+        <button (click)="changeStatusInReservation(reservation.id, 'refused')" class="btn btn-outline-danger">Rechazar</button>
+        <button class="btn btn-outline-success" (click)="goBack()">Volver...</button>
+    </div>
+}

@@ -40,14 +40,20 @@ email: string = '';
 
        this.authService.login(email, password).subscribe(response => {
           //console.log('Respuesta del servidor:', response.user);
+
+          console.log("aqui   ",response.status)
           if (response.status===200) {
               //console.log(response.user);
               localStorage.setItem('accessToken', response.token);
               localStorage.setItem('userCurrent', JSON.stringify(response.user));
               this.router.navigate(['/dashboard']);
           }
+
        }, error => {
           console.error('Error en la solicitud de inicio de sesión:', error);
+          if (error.status===401) {
+              alert("Contraseña incorrecta");
+          }
           //alert('Inicio de sesión fallido. Por favor, verifica tu correo electrónico y contraseña.');
           // Aquí puedes manejar los errores, como mostrar un mensaje de error al usuario
        });

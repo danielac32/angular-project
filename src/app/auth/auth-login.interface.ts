@@ -14,3 +14,9 @@ export interface UserUpdate {
     password2?: string;
     directionId: number;
 };
+
+export interface UserProfile {
+	name: string;
+    email: string;
+    direction: string;
+};

@@ -1,62 +1,78 @@
-<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-  <div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
- <h2 class="mb-4 text-center">Actualizar</h2>
-  <form style="width: 300px;" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+<!------------------------------------------------------------------------------------------------------------------------>
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;" >
+<div *ngIf="view === true">
+	  <div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;" *ngIf="person">
+ 		<h2 class="mb-4 text-center">Información</h2>
+			 <div class="mb-3">
+			   <label>Nombre: {{ person.name }}</label>
+			 </div>
+			<div class="mb-3">
+			   <label>Correo: {{ person.email }}</label>
+			</div>
+			<div class="mb-3">
+			   <label>Dirección: {{ direction }}</label>
+			</div>
+			<button type="submit" class="btn btn-primary btn-block" (click)="handleClick()">Actualizar</button>
+	</div>
+</div>
+<!------------------------------------------------------------------------------------------------------------------------>
+<div *ngIf="view === false">
+<div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
+<h2 class="mb-4 text-center">Actualizar</h2>
 
-
-
-<div class="mb-3">
-  <input type="text" formControlName="name" required  placeholder="Nombre de Usuario" class="form-field">
-  <div *ngIf="updateForm.get('name')?.hasError('required')" class="error-message" >
-      nombre requerido
-  </div>
- </div>
-
-
-
-<div class="mb-3">
-  <input type="email" formControlName="email" required  placeholder="Correo electrónico" class="form-field">
-  <div *ngIf="updateForm.get('email')?.hasError('email')" class="error-message">
-      El email ingresado no es válido.
-  </div>
-  <div *ngIf="updateForm.get('email')?.hasError('required')" class="error-message" >
-      email requerido
-  </div>
- </div>
-
-
+<form style="width: 300px;" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+		<div class="mb-3">
+		  <input type="text" formControlName="name" required  placeholder="Nombre de Usuario" class="form-field">
+		  <div *ngIf="updateForm.get('name')?.hasError('required')" class="error-message" >
+		      Nombre requerido
+		  </div>
+		</div>
+		<div class="mb-3">
+		  <input type="email" formControlName="email" required  placeholder="Correo electrónico" class="form-field">
+		  <div *ngIf="updateForm.get('email')?.hasError('email')" class="error-message">
+		      El email ingresado no es válido.
+		  </div>
+		  <div *ngIf="updateForm.get('email')?.hasError('required')" class="error-message" >
+		      email requerido
+		  </div>
+		</div>
+<!--
 <div class="mb-3">
   <input type="text" formControlName="directionId" required  placeholder="direccion de Usuario" class="form-field">
-  <div *ngIf="updateForm.get('directionId')?.hasError('required')" class="error-message" >
+<div *ngIf="updateForm.get('directionId')?.hasError('required')" class="error-message" >
       direccion requerida
   </div>
- </div>
-
-
- <div class="mb-3">
-  <input type="password"  formControlName="password" required placeholder="Contraseña" class="form-field">
-  <div *ngIf="updateForm.get('password')?.hasError('required')">
-      contraseña requerida
-  </div>
-  <div *ngIf="updateForm.get('password')?.hasError('minlength')">
-        contraseña menor a 6 caracteres
-  </div>
-   </div>
-
-  <div class="mb-3">
-  <input type="password"  formControlName="password2" required placeholder="Repita la Contraseña" class="form-field">
-  <div *ngIf="updateForm.get('password2')?.hasError('required')">
-      contraseña requerida
-  </div>
-  <div *ngIf="updateForm.get('password2')?.hasError('minlength')">
-        contraseña menor a 6 caracteres
-  </div>
-   </div>
-   <!-- Verifica si las contraseñas son iguales -->
-        <div *ngIf="updateForm.get('password')?.value !== updateForm.get('password2')?.value" class="error-message">
-          Las contraseñas no coinciden
-        </div>
-  <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
-  </form>
+ </div>-->
+		<div class="mb-3">
+		  <select formControlName="selectedItem" >
+		    <option *ngFor="let item of items" [value]="item">{{ item }}</option>
+		  </select>
+		</div>
+		<div class="mb-3">
+		  <input type="password"  formControlName="password" required placeholder="Contraseña" class="form-field">
+		  <div *ngIf="updateForm.get('password')?.hasError('required')">
+		      contraseña requerida
+		  </div>
+		  <div *ngIf="updateForm.get('password')?.hasError('minlength')">
+		        contraseña menor a 6 caracteres
+		  </div>
+		</div>
+		<div class="mb-3">
+		  <input type="password"  formControlName="password2" required placeholder="Repita la Contraseña" class="form-field">
+		  <div *ngIf="updateForm.get('password2')?.hasError('required')">
+		      contraseña requerida
+		  </div>
+		  <div *ngIf="updateForm.get('password2')?.hasError('minlength')">
+		        contraseña menor a 6 caracteres
+		  </div>
+		</div>
+		<div *ngIf="updateForm.get('password')?.value !== updateForm.get('password2')?.value" class="error-message">
+		  Las contraseñas no coinciden
+		</div>
+	    <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
+	    <button type="submit" class="btn btn-primary btn-block" (click)="handleClick()">volver</button>
+</form>
 </div>
 </div>
+</div>
+<!------------------------------------------------------------------------------------------------------------------------>

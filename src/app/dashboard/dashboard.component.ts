@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 //import { DataService } from '../shared/service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -20,9 +22,23 @@ import { AuthService } from '../auth/auth.service';
 export class DashboardComponent implements OnInit {
   sharedData: any;
   userName: string = '';
-  constructor(private router: Router,private authService: AuthService/*,private dataService: DataService*/) {}
+  message:any;
+  status:any;
+
+
+  constructor(private route: ActivatedRoute,private router: Router,private authService: AuthService/*,private dataService: DataService*/) {}
 
 	ngOnInit(): void {
+   this.route.queryParams.subscribe(params => {
+    const parametro1 = params['status'];
+    const parametro2 = params['message'];
+    
+    console.log('status:', parametro1);
+    console.log('message:', parametro2);
+    this.status=parametro1;
+    this.message=parametro2;
+  });
+
     this.userName = this.authService.getUserName();
 	}
 

@@ -1,0 +1,76 @@
+<form [formGroup]="myForm"
+    (ngSubmit)="createReservation()"
+    >
+    <!-- <div class="mb-3">
+      <label for="requerimiento" class="form-label">Requerimiento</label>
+      <input
+        formControlName="requerimiento"
+        type="text"
+        class="form-control"
+        id="requerimiento"
+        aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button> -->
+
+    <input
+        formControlName="requerimiento"
+        type="text"
+        class="form-control"
+        id="requerimiento"
+        aria-describedby="emailHelp" 
+    />
+
+    <input
+        formControlName="startDate"
+        type="text"
+        class="form-control"
+        id="requerimiento"
+        aria-describedby="emailHelp" 
+    />
+
+    <input
+        formControlName="endDate"
+        type="text"
+        class="form-control"
+        id="requerimiento"
+        aria-describedby="emailHelp" 
+    />
+
+    <input
+        formControlName="cantidad_persona"
+        type="number"
+        class="form-control"
+        id="requerimiento"
+        aria-describedby="emailHelp" 
+    />
+
+    <input
+        formControlName="descripcion"
+        type="text"
+        class="form-control"
+        id="requerimiento"
+        aria-describedby="emailHelp" 
+    />
+
+    <input
+        formControlName="userId"
+        type="number"
+        class="form-control"
+        id="requerimiento"
+        aria-describedby="emailHelp" 
+    />
+
+    <input
+        formControlName="salonId"
+        type="number"
+        class="form-control"
+        id="requerimiento"
+        aria-describedby="emailHelp" 
+    />
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
