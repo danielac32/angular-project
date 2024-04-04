@@ -36,14 +36,14 @@ email: string = '';
     if(this.loginForm.valid) {
        const email = this.loginForm.get('email')!.value;
        const password = this.loginForm.get('password')!.value;
-       console.log(email,password);
+       //console.log(email,password);
 
        this.authService.login(email, password).subscribe(response => {
-          console.log('Respuesta del servidor:', response.user);
+          //console.log('Respuesta del servidor:', response.user);
           if (response.status===200) {
-              console.log(response.user);
+              //console.log(response.user);
               localStorage.setItem('accessToken', response.token);
-              localStorage.setItem('userCurrent', response.user.name);
+              localStorage.setItem('userCurrent', JSON.stringify(response.user));
               this.router.navigate(['/dashboard']);
           }
        }, error => {
