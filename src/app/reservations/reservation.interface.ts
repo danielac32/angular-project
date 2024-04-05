@@ -13,3 +13,9 @@ export interface Reservation {
     userId:           number;
     salonId:          number;
 }
+ 
+
+
+export interface ReservationResponse2 {
+  reservation: Reservation
+}

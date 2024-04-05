@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Reservation, ReservationResponse } from '../reservations/reservation.interface';
+import { Reservation, ReservationResponse,ReservationResponse2 } from '../reservations/reservation.interface';
 import { CreateReservation } from '../reservations/create-reservation.interface';
 import { StatusReserveTypes } from '../reservations/status-reserve.interface';
 
@@ -24,8 +24,8 @@ export class ReservationsService {
     return this.httpClient.get<ReservationResponse>(`${ this.baseUrl}/reservations?state=${ status }`);
   }
 
-  reservationById(id: string): Observable<Reservation> {
-    return this.httpClient.get<Reservation>(`${ this.baseUrl }/reservations/${ id }`)
+  reservationById(id: string): Observable<ReservationResponse2> {
+    return this.httpClient.get<ReservationResponse2>(`${ this.baseUrl }/reservations/${ id }`)
   }
 
   changeStatusInReservation(id: number, newStatus: string): Observable<Reservation> {

@@ -3,12 +3,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReservationsService } from '../services/reservations.service';
 import { Router,NavigationExtras } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-reservations',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule,ReactiveFormsModule, HttpClientModule],
   providers: [ReservationsService],
   templateUrl: './create-reservations.component.html',
   styleUrl: './create-reservations.component.css'
