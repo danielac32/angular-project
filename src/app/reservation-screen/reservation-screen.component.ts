@@ -6,13 +6,13 @@ import { ReservationsService } from '../services/reservations.service';
 import { Reservation} from '../reservations/reservation.interface';
 import { StatusReserveTypes } from '../reservations/status-reserve.interface';
 import { CommonModule } from '@angular/common';
-
+import { SalonService } from '../salon/salon.service';
 
 @Component({
   selector: 'app-reservation-screen',
   standalone: true,
   imports: [HttpClientModule,CommonModule],
-  providers: [ReservationsService],
+  providers: [ReservationsService,SalonService],
   templateUrl: './reservation-screen.component.html',
   styleUrl: './reservation-screen.component.css'
 })
@@ -24,14 +24,15 @@ import { CommonModule } from '@angular/common';
 export class ReservationScreenComponent implements OnInit{
  reservation!: Reservation;
  reservationId?:any;
-
-
+ items!: string[];
+ salon!:string;
 
 
   constructor(
     private reservationsServices: ReservationsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private salonService: SalonService,
   ) {}
 
 ngOnInit(): void {
@@ -42,11 +43,19 @@ ngOnInit(): void {
       this.reservationsServices.reservationById(this.reservationId).subscribe( ({ reservation }) => {
       this.reservation = reservation;
       console.log(this.reservation)
+      this.salonService.findAll().subscribe(({ salones }) => {
+            this.items = salones.map(salon => salon.name);
+            this.salon=this.items[this.reservation.salonId-1]
+            console.log("salon: ",this.salon)
+      }, error => {
+            console.error('Error en la solicitud :', error);
+      });
      }, error => {
         console.error('Error en la solicitud :', error);
      });
     });
- 
+
+
   /*
     this.activatedRoute.params
       .pipe(
@@ -60,6 +69,12 @@ ngOnInit(): void {
         return;
       })*/
   }
+
+
+buscarStringEnLista(lista: string[], cadena: string): number {
+    return lista.indexOf(cadena);
+  }
+
 
   changeStatusInReservation(id: number, status: string) {
     this.reservationsServices.changeStatusInReservation(id, status)

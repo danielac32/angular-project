@@ -1,76 +1,90 @@
-<form [formGroup]="myForm"
-    (ngSubmit)="createReservation()"
-    >
-    <!-- <div class="mb-3">
-      <label for="requerimiento" class="form-label">Requerimiento</label>
-      <input
-        formControlName="requerimiento"
-        type="text"
-        class="form-control"
-        id="requerimiento"
-        aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button> -->
-
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;" >
+<div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
+<form style="width: 400px;" [formGroup]="myForm" (ngSubmit)="createReservation()">
+   <div class="mb-3">
     <input
         formControlName="requerimiento"
         type="text"
-        class="form-control"
-        id="requerimiento"
-        aria-describedby="emailHelp" 
+        required  placeholder="Requerimiento" class="form-field" 
     />
+    @if (myForm.get('requerimiento')?.hasError('required')){
+        <div class="error-message" >
+            Nombre requerido
+        </div>
+    }
 
+ </div>
+ <div class="mb-3">
     <input
         formControlName="startDate"
-        type="text"
-        class="form-control"
-        id="requerimiento"
-        aria-describedby="emailHelp" 
+        type="datetime-local"
+        required class="form-field" 
+        [(ngModel)]="selectedDateTime" 
+        (change)="formatDateTime()"
     />
-
+    <p>{{ formattedDateTime }}</p>
+    @if (myForm.get('startDate')?.hasError('required')){
+        <div class="error-message" >
+            Fecha requerida
+        </div>
+    }
+ </div>
+ <div class="mb-3">
     <input
         formControlName="endDate"
-        type="text"
-        class="form-control"
-        id="requerimiento"
-        aria-describedby="emailHelp" 
+        type="datetime-local"
+        required  
+        class="form-field" 
     />
 
+    @if (myForm.get('endDate')?.hasError('required')){
+        <div class="error-message" >
+            Fecha requerida
+        </div>
+    }
+ </div>
+ <div class="mb-3">
     <input
         formControlName="cantidad_persona"
         type="number"
-        class="form-control"
-        id="requerimiento"
-        aria-describedby="emailHelp" 
+        required  placeholder="Cantidad de persona" class="form-field" 
     />
-
+    @if (myForm.get('cantidad_persona')?.hasError('required')){
+        <div class="error-message" >
+            Cantidad de personas requerida
+        </div>
+    }
+ </div>
+ <div class="mb-3">
     <input
         formControlName="descripcion"
         type="text"
-        class="form-control"
-        id="requerimiento"
-        aria-describedby="emailHelp" 
+        required  placeholder="Descripcion" class="form-field" 
     />
+    @if (myForm.get('descripcion')?.hasError('required')){
+        <div class="error-message" >
+            Descripcion requerida
+        </div>
+    }
+ </div>
 
-    <input
-        formControlName="userId"
-        type="number"
-        class="form-control"
-        id="requerimiento"
-        aria-describedby="emailHelp" 
-    />
+ <div class="mb-3">
+    <select formControlName="selectedItem" >
+        @for (item of items; track items) {
+            <option>{{ item }}</option>
+        } @empty {
+            <option>There are no items.</option>
+        }          
+    </select>
+    @if (myForm.get('selectedItem')?.hasError('required')){
+        <div class="error-message" >
+            Descripcion requerida
+        </div>
+    }
+ </div>
+ 
 
-    <input
-        formControlName="salonId"
-        type="number"
-        class="form-control"
-        id="requerimiento"
-        aria-describedby="emailHelp" 
-    />
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary btn-block">Crear</button>
   </form>
+</div>
+</div>

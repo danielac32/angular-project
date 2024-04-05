@@ -40,9 +40,12 @@ export class ProfileComponent implements OnInit {
   direction!:string;
   view !:boolean;
   newUser !:UserUpdate;
-
+  directionId!:number;
 
   constructor(private formBuilder: FormBuilder,private router: Router,private authService: AuthService,private directionsService: DirectionsService) {}
+
+  
+
 
 
   ngOnInit(): void {
@@ -53,7 +56,7 @@ export class ProfileComponent implements OnInit {
         this.items = response.directions.map((direction: { address: string }) => direction.address);
 
         if (this.items && this.person && this.person.directionId !== null && this.person.directionId !== undefined) {
-            this.direction = this.items[this.person.directionId];
+            this.direction = this.items[this.person.directionId-1];
         }
         console.log(" direction: ",this.items);
      }, error => {
@@ -74,7 +77,7 @@ export class ProfileComponent implements OnInit {
           password: ['', [Validators.required, Validators.minLength(6)]],
           password2: ['', [Validators.required, Validators.minLength(6)]],
           ///directionId: [this.person.directionId, [Validators.required]],
-          selectedItem: ['']
+          selectedItem: ['Direccion general Oficina Gestion Administrativa', Validators.required]
         });
      }
      
@@ -95,12 +98,7 @@ export class ProfileComponent implements OnInit {
 
 
   buscarStringEnLista(lista: string[], cadena: string): number {
-    for (let i = 0; i < lista.length; i++) {
-        if (lista[i] === cadena) {
-            return i; 
-        }
-    }
-    return -1;  
+    return lista.indexOf(cadena);  
   }
 
 
@@ -113,6 +111,11 @@ export class ProfileComponent implements OnInit {
            const password2 = this.updateForm.get('password2')!.value;*/
 
           const { name, email, selectedItem, password, password2 } = this.updateForm.value;
+          this.directionId=this.buscarStringEnLista(this.items,this.updateForm.get('selectedItem')!.value);
+
+          console.log("dir ",this.directionId)
+          console.log("dir ",selectedItem)
+
            if(password !== password2){
                console.log('Las contraseñas no coinciden')
                const parametros: NavigationExtras = {
@@ -124,11 +127,13 @@ export class ProfileComponent implements OnInit {
               this.router.navigate(['/dashboard'],parametros);
            }else{
 
+               console.log("dir2 ",this.directionId+1)
+
               this.newUser={
                   name:name,
                   email:email,
                   password:password,
-                  directionId:this.buscarStringEnLista(this.items,selectedItem)
+                  directionId:this.directionId+1
                 };
 
 

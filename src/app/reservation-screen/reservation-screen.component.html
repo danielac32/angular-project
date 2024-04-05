@@ -1,11 +1,11 @@
 @if (reservation) {
-    <div>
-        <p>{{ reservation.descripcion }}</p>
+<div class="card p-4 container d-flex justify-content-center " style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
+        <p> Descripcion: {{ reservation.descripcion }}</p>
         <p>Status: {{ reservation.state }}</p>
-        <p>Salon: {{ reservation.salonId }}</p>
+        <p>Salon: {{ salon }}</p>
         <p>Fecha de inicio: {{ reservation.startDate }}</p>
         <p>Fecha de finalizacion: {{ reservation.endDate }}</p>
-        <p>{{reservation.descripcion}}</p>
+        <p>Requerimiento: {{reservation.requerimiento}}</p>
 
         <button (click)="changeStatusInReservation(reservation.id, 'accepted')" class="btn btn-primary">Aceptar</button>
         <button (click)="changeStatusInReservation(reservation.id, 'refused')" class="btn btn-outline-danger">Rechazar</button>

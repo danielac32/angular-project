@@ -1,7 +1,8 @@
 <!------------------------------------------------------------------------------------------------------------------------>
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;" >
-<div *ngIf="view === true">
-	  <div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;" *ngIf="person">
+
+@if(view === true){
+	 <div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;" *ngIf="person">
  		<h2 class="mb-4 text-center">Información</h2>
 			 <div class="mb-3">
 			   <label>Nombre: {{ person.name }}</label>
@@ -14,10 +15,9 @@
 			</div>
 			<button type="submit" class="btn btn-primary btn-block" (click)="handleClick()">Actualizar</button>
 	</div>
-</div>
-<!------------------------------------------------------------------------------------------------------------------------>
-<div *ngIf="view === false">
-<div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
+}
+@else {
+	<div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
 <h2 class="mb-4 text-center">Actualizar</h2>
 
 <form style="width: 300px;" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
@@ -36,13 +36,6 @@
 		      email requerido
 		  </div>
 		</div>
-<!--
-<div class="mb-3">
-  <input type="text" formControlName="directionId" required  placeholder="direccion de Usuario" class="form-field">
-<div *ngIf="updateForm.get('directionId')?.hasError('required')" class="error-message" >
-      direccion requerida
-  </div>
- </div>-->
 		<div class="mb-3">
 		  <select formControlName="selectedItem" >
 		    <option *ngFor="let item of items" [value]="item">{{ item }}</option>
@@ -73,6 +66,5 @@
 	    <button type="submit" class="btn btn-primary btn-block" (click)="handleClick()">volver</button>
 </form>
 </div>
-</div>
-</div>
-<!------------------------------------------------------------------------------------------------------------------------>
+
+}
