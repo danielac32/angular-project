@@ -38,7 +38,7 @@ export class ReservationsService {
           });
           console.log(term)
           console.log(state)
-          return this.httpClient.get<ReservationResponse3>(`${ this.baseUrl }/users/${ term }/reservations?state=${state}`,{ headers })
+          return this.httpClient.get<ReservationResponse3>(`${ this.baseUrl }/users/${ term }/reservations/${state}`,{ headers })
       }
       return new Observable<ReservationResponse3>();
   }
