@@ -43,14 +43,21 @@ email: string = '';
 
           console.log("aqui   ",response.status)
           if (response.status===200) {
+              if(response.user.isActive === false){
+                 console.log("el usuario esta desactivado");
+                 alert("El usuario esta desactivado");
+                 return;
+              }
               //console.log(response.user);
               localStorage.setItem('accessToken', response.token);
               localStorage.setItem('userCurrent', JSON.stringify(response.user));
+              console.log("active   ",response.user.isActive)
               this.router.navigate(['/dashboard']);
           }
 
        }, error => {
           console.error('Error en la solicitud de inicio de sesión:', error);
+          alert('Error en la solicitud :');
           if (error.status===401) {
               alert("Contraseña incorrecta");
           }
@@ -59,8 +66,10 @@ email: string = '';
        });
        
     }
-}
-
+  }
+  onClick():void {
+    console.log("aqui")
+  }
 
 
 }

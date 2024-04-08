@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router ,ActivatedRoute,ActivatedRouteSnapshot} from '@angular/router';
 import { AuthService } from './auth.service';
 
 
@@ -7,11 +7,29 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  rol?:string;
 
-  canActivate(): boolean {
+  constructor(private route: ActivatedRoute,private authService: AuthService, private router: Router) {}
+
+  canActivate(next: ActivatedRouteSnapshot): boolean {
     // Verificar si el usuario está autenticado
+    //console.log("guard: ",next.snapshot.data);
+ 
+    const data = next.data; // Obtener toda la data
+    const rol = data['rol'] as string[];
+
+    this.rol=this.authService.getRol();
+
+  
     if (this.authService.isLoggedIn()) {
+      if (rol && this.rol && rol.length > 0 && !rol.includes(this.rol)) {
+         console.log("no puede entrar aqui")
+         console.log("1: ",rol)
+         console.log("2: ",this.rol)
+         alert("no puede entrar aqui")
+         this.router.navigate(['/dashboard']);
+         return false;
+      }
       return true; // Permitir la navegación
     } else {
       // Si el usuario no está autenticado, redirigir al componente de inicio de sesión

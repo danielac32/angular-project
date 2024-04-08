@@ -15,6 +15,9 @@ import { DirectionsService } from '../directions/directions.service';
 import  {UserUpdate} from '../auth/auth-login.interface';
 import  {UserProfile} from '../auth/auth-login.interface';
 
+import { DirectionResponse,Direction } from '../directions/directions.interface';
+
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -24,23 +27,17 @@ import  {UserProfile} from '../auth/auth-login.interface';
   providers: [AuthService,DirectionsService]
 
 })
-
-/*interface Direction {
-    id?: number;
-    address: string;
-};*/
-
+ 
 
 export class ProfileComponent implements OnInit {
   
   updateForm!: FormGroup;
   person: UserUpdate | null = null;
-  items!: string[];
-  user!: UserProfile;
-  direction!:string;
   view !:boolean;
   newUser !:UserUpdate;
-  directionId!:number;
+  direction!:string;
+  public directions?: Direction[] = []
+
 
   constructor(private formBuilder: FormBuilder,private router: Router,private authService: AuthService,private directionsService: DirectionsService) {}
 
@@ -52,43 +49,41 @@ export class ProfileComponent implements OnInit {
 
     this.view=true;
      this.person = this.authService.getUser()
-     this.directionsService.findAll().subscribe(response => {
-        this.items = response.directions.map((direction: { address: string }) => direction.address);
+     
+     this.directionsService.findAll().subscribe(({ directions }) => {
+        
+        this.directions = directions;
+        if(this.person){
 
-        if (this.items && this.person && this.person.directionId !== null && this.person.directionId !== undefined) {
-            this.direction = this.items[this.person.directionId-1];
+           const direction = this.directions.find((direction:Direction) => direction.id === this.person?.directionId);
+            if (direction) {
+              this.direction = direction.address; // Suponiendo que 'address' es la propiedad que deseas asignar a 'this.direction'
+            } else {
+              console.log('No se encontró ninguna dirección con el ID proporcionado.');
+              alert('No se encontró ninguna dirección con el ID proporcionado.');
+            }
         }
-        console.log(" direction: ",this.items);
+        //\console.log("aquii: ",this.directions[0].address )
      }, error => {
         console.error('Error en la solicitud :', error);
+        alert('Error en la solicitud :');
      });
      
-
-     console.log("person : ",this.person)
-  
-     
+ 
      
      
 
-     if(this.person){
+     if(this.person ){
         this.updateForm = this.formBuilder.group({
           name: [this.person.name, Validators.required], // Campo name con validación de requerido
           email: [this.person.email, [Validators.required, Validators.email]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           password2: ['', [Validators.required, Validators.minLength(6)]],
           ///directionId: [this.person.directionId, [Validators.required]],
-          selectedItem: ['Direccion general Oficina Gestion Administrativa', Validators.required]
+          selectedItem: ['', Validators.required]
         });
      }
-     
 
-    
-     /* this.user={
-          name: this.person.name,
-          email:this.person.email,
-          direction:this.items[this.person.directionId]
-      }
-          console.log("user: ",this.user)*/
       
   }
 
@@ -97,12 +92,11 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  buscarStringEnLista(lista: string[], cadena: string): number {
-    return lista.indexOf(cadena);  
-  }
+ 
 
 
   onSubmit(): void {
+        if(!this.updateForm.valid) return;
         if(this.updateForm.valid && this.person) {
           /* const name = this.updateForm.get('name')!.value;
            const email = this.updateForm.get('email')!.value;
@@ -111,10 +105,7 @@ export class ProfileComponent implements OnInit {
            const password2 = this.updateForm.get('password2')!.value;*/
 
           const { name, email, selectedItem, password, password2 } = this.updateForm.value;
-          this.directionId=this.buscarStringEnLista(this.items,this.updateForm.get('selectedItem')!.value);
-
-          console.log("dir ",this.directionId)
-          console.log("dir ",selectedItem)
+        
 
            if(password !== password2){
                console.log('Las contraseñas no coinciden')
@@ -127,13 +118,11 @@ export class ProfileComponent implements OnInit {
               this.router.navigate(['/dashboard'],parametros);
            }else{
 
-               console.log("dir2 ",this.directionId+1)
-
               this.newUser={
                   name:name,
                   email:email,
                   password:password,
-                  directionId:this.directionId+1
+                  directionId:Number(selectedItem)
                 };
 
 
@@ -144,7 +133,8 @@ export class ProfileComponent implements OnInit {
                 }
                  
              }, error => {
-                console.error('Error en la solicitud de inicio de sesión:', error);
+                console.error('Error en la solicitud ', error);
+                alert('Error en la solicitud :');
              });
           }
        }

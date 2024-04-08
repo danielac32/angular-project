@@ -1,0 +1,43 @@
+  <button type="submit" class="btn btn-primary btn-block" (click)="handleClick()">volver</button>
+  <div>
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Active</th>
+                <!--<th>Password</th>-->
+                <th>Direction ID</th>
+                <th>Rol</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+         
+            <tbody >
+        @for (user of users; track user.id) {
+              <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.isActive ? 'Si' : 'No' }}</td>
+                <!--<td>{{ user.password }}</td>-->
+                <td>{{ user.direction?.address }}</td>
+                <td>{{ user.rol}}</td>
+                  @if (user.isActive === true){
+                      <td><a class="nav-link" (click)="desactivar(user?.email)">Desactivar</a></td>
+                  }
+                  @else{
+                      <td><a class="nav-link" (click)="activar(user?.email)">Activar</a></td>
+                  }
+                  <td><a class="nav-link" (click)="editar(user?.email)">Editar</a></td>
+              </tr>
+        }
+            </tbody>
+        </table>
+
+
+  <div class="content">
+    <router-outlet></router-outlet> <!-- Aquí se cargarán los componentes hijos -->
+  </div>
+</div>

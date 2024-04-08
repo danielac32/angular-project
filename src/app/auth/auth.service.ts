@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import  {User,UserUpdate} from './auth-login.interface';
-import { HttpClient } from '@angular/common/http';
+import  {User,UserUpdate,UserResponse2,loginUser,UserResponse,UserUpdateActive} from './auth-login.interface';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import {CreateUser} from "./create-user/create-user.interface"
 
 
 
@@ -17,24 +18,89 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient,private router: Router) { }
   
+  updateRol(email:string,rol:string):Observable<UserResponse>{
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+          return this.httpClient.patch<UserResponse>(`${ this.baseUrl }/userRol/${email}`,{rol: rol},{ headers });
+      }
+      return new Observable<UserResponse>();
+  }
 
-  updateUser(email:string,user:UserUpdate):Observable<any>{
-   return this.httpClient.patch<UserUpdate>(`${ this.baseUrl }/users/${email}`, {
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        directionId: user.directionId
-    });
+
+  getUserById(email:string):Observable<UserResponse>{
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+          return this.httpClient.get<UserResponse>(`${ this.baseUrl }/users/${email}`,{ headers });
+      }
+      return new Observable<UserResponse>();
+  }
+
+
+  allUser():Observable<UserResponse>{
+    const token = localStorage.getItem('accessToken');
+      if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+          return this.httpClient.get<UserResponse>(`${ this.baseUrl }/users/`,{ headers });
+      }
+      return new Observable<UserResponse>();
+   }
+  
+  createUser(newUser: CreateUser):Observable<CreateUser>{
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+          return this.httpClient.post<CreateUser>(`${ this.baseUrl }/users`, {...newUser},{ headers });
+      }
+      return new Observable<CreateUser>();
+  }
+  
+  updateUserActive(email:string,active:UserUpdateActive):Observable<UserResponse2>{
+  const token = localStorage.getItem('accessToken');
+      if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+         return this.httpClient.patch<UserResponse2>(`${ this.baseUrl }/userActive/${email}`, {
+              isActive: active.isActive
+          },{ headers });
+      }
+      return new Observable<UserResponse2>();
+  }
+
+  updateUser(email:string,user:UserUpdate):Observable<UserResponse2>{
+  const token = localStorage.getItem('accessToken');
+      if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+         return this.httpClient.patch<UserResponse2>(`${ this.baseUrl }/users/${email}`, {
+              name: user.name,
+              email: user.email,
+              password: user.password,
+              directionId: user.directionId
+          },{ headers });
+      }
+      return new Observable<UserResponse2>();
   }
 
 
 
-  login(email:string,password:string):Observable<any>{
+  login(email:string,password:string):Observable<loginUser>{
   	const user :User={
   		email:email,
   		password:password
   	}
-  	return this.httpClient.post<User>(`${ this.baseUrl }/auth/login`, {
+  	return this.httpClient.post<loginUser>(`${ this.baseUrl }/auth/login`, {
       ...user
     });
 
@@ -60,15 +126,29 @@ export class AuthService {
   getUserName(): string{
     const userInfo = localStorage.getItem('userCurrent');
     const user = userInfo ? JSON.parse(userInfo) : null;
-    console.log(user.name)
     if(!user) return "";
     return user.name;
   }
   
+
+  getUserEmail(): string{
+    const userInfo = localStorage.getItem('userCurrent');
+    const user = userInfo ? JSON.parse(userInfo) : null;
+    if(!user) return "";
+    return user.email;
+  }
+
+
   getUser(){
     const userInfo = localStorage.getItem('userCurrent');
     const user = userInfo ? JSON.parse(userInfo) : null;
     return user;
+  }
+  getRol(){
+    const userInfo = localStorage.getItem('userCurrent');
+    const user = userInfo ? JSON.parse(userInfo) : null;
+    if(!user) return "";
+    return user.rol;
   }
 
 

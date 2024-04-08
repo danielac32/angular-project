@@ -3,12 +3,13 @@
         <p> Descripcion: {{ reservation.descripcion }}</p>
         <p>Status: {{ reservation.state }}</p>
         <p>Salon: {{ salon }}</p>
-        <p>Fecha de inicio: {{ reservation.startDate }}</p>
-        <p>Fecha de finalizacion: {{ reservation.endDate }}</p>
+        <p>Fecha de inicio: {{ startDate | date:'yyyy-MM-dd, h:mm a' }}</p>
+        <p>Fecha de finalizacion: {{ endDate | date:'yyyy-MM-dd, h:mm a' }}</p>
         <p>Requerimiento: {{reservation.requerimiento}}</p>
-
-        <button (click)="changeStatusInReservation(reservation.id, 'accepted')" class="btn btn-primary">Aceptar</button>
-        <button (click)="changeStatusInReservation(reservation.id, 'refused')" class="btn btn-outline-danger">Rechazar</button>
-        <button class="btn btn-outline-success" (click)="goBack()">Volver...</button>
+        @if (rol === "admin"){
+                <button (click)="changeStatusInReservation(reservation.id, 'accepted')" class="btn btn-primary">Aceptar</button>
+                <button (click)="changeStatusInReservation(reservation.id, 'refused')" class="btn btn-outline-danger">Rechazar</button>
+                <button class="btn btn-outline-success" (click)="goBack()">Volver...</button>
+        }
     </div>
 }

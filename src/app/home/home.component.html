@@ -11,6 +11,14 @@
       <li class="nav-item">
         <a class="nav-link text-dark" >Reporte por fecha</a>
       </li>
+      <li class="nav-item">
+        <!--<a class="nav-link" routerLink="/users" >Usuarios</a>-->
+        <a class="nav-link" [routerLink]="['/users']" [queryParams]="{ reload: true }">Usuarios</a>
+
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/create-user" >Crear Usuario</a>
+      </li>
       <!-- Otros enlaces de navegación -->
     </ul>
   </div>

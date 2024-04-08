@@ -18,11 +18,12 @@
     <input
         formControlName="startDate"
         type="datetime-local"
-        required class="form-field" 
-        [(ngModel)]="selectedDateTime" 
-        (change)="formatDateTime()"
-    />
-    <p>{{ formattedDateTime }}</p>
+        required 
+        class="form-field" 
+        (input)="convertTimeStart()"
+        
+/>
+    <label>{{startTime}}</label>
     @if (myForm.get('startDate')?.hasError('required')){
         <div class="error-message" >
             Fecha requerida
@@ -30,13 +31,16 @@
     }
  </div>
  <div class="mb-3">
+
+
     <input
         formControlName="endDate"
         type="datetime-local"
         required  
         class="form-field" 
+       (input)="convertTimeEnd()"
     />
-
+    <label>{{endTime}}</label>
     @if (myForm.get('endDate')?.hasError('required')){
         <div class="error-message" >
             Fecha requerida
@@ -70,8 +74,8 @@
 
  <div class="mb-3">
     <select formControlName="selectedItem" >
-        @for (item of items; track items) {
-            <option>{{ item }}</option>
+        @for (salon of salons; track salon.id) {
+            <option value="{{ salon.id }}">{{ salon.name }}</option>
         } @empty {
             <option>There are no items.</option>
         }          

@@ -7,11 +7,22 @@
     </div>
 
     <div class="container">
-        @for (reservation of reservations; track reservation.id) {
-            <app-reservation-card
-                class="card"
-                [reservation]="reservation"
-             />
+        @if (rol==="admin"){
+            @for (reservation of reservations2; track reservation.id) {
+                <app-reservation-card
+                    class="card"
+                    [reservation]="reservation"
+                 />
+            }
         }
+        @if (rol==="user"){
+            @for (reservation of reservations3; track reservation.id) {
+                <app-reservation-card
+                    class="card"
+                    [reservation]="reservation"
+                 />
+            }
+        }
+        
     </div>
 </section>

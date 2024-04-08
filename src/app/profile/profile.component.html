@@ -37,9 +37,13 @@
 		  </div>
 		</div>
 		<div class="mb-3">
-		  <select formControlName="selectedItem" >
-		    <option *ngFor="let item of items" [value]="item">{{ item }}</option>
-		  </select>
+		<select formControlName="selectedItem" >
+		    @for (direction of directions; track direction.id) {
+	            <option value="{{ direction.id }}">{{ direction.address }}</option>
+	        } @empty {
+	            <option>There are no items.</option>
+	        }   
+		</select>
 		</div>
 		<div class="mb-3">
 		  <input type="password"  formControlName="password" required placeholder="Contraseña" class="form-field">

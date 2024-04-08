@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-
+import {DirectionResponse} from "./directions.interface"
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,15 @@ export class DirectionsService {
   private baseUrl = 'http://localhost:4000';
   constructor(private httpClient: HttpClient,private router: Router) { }
 
-  findAll():Observable<any>{
-  	return this.httpClient.get<any>(`${ this.baseUrl }/directions/`,{});
+  findAll():Observable<DirectionResponse>{
+    const token = localStorage.getItem('accessToken');
+      if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+  	      return this.httpClient.get<DirectionResponse>(`${ this.baseUrl }/directions/`,{ headers });
+      }
+      return new Observable<DirectionResponse>();
   }
 
 

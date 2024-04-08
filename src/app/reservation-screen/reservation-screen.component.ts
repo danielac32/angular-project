@@ -7,12 +7,14 @@ import { Reservation} from '../reservations/reservation.interface';
 import { StatusReserveTypes } from '../reservations/status-reserve.interface';
 import { CommonModule } from '@angular/common';
 import { SalonService } from '../salon/salon.service';
+import { SalonResponse,Salon } from '../salon/salon.interface';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-reservation-screen',
   standalone: true,
   imports: [HttpClientModule,CommonModule],
-  providers: [ReservationsService,SalonService],
+  providers: [ReservationsService,SalonService,AuthService],
   templateUrl: './reservation-screen.component.html',
   styleUrl: './reservation-screen.component.css'
 })
@@ -24,8 +26,15 @@ import { SalonService } from '../salon/salon.service';
 export class ReservationScreenComponent implements OnInit{
  reservation!: Reservation;
  reservationId?:any;
- items!: string[];
+ 
  salon!:string;
+ public salons?: Salon[] = []
+ currentDate: Date = new Date();
+ startDate?:Date;
+ endDate?:Date;
+ rol?:string;
+
+
 
 
   constructor(
@@ -33,6 +42,7 @@ export class ReservationScreenComponent implements OnInit{
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private salonService: SalonService,
+    private authService: AuthService
   ) {}
 
 ngOnInit(): void {
@@ -43,17 +53,37 @@ ngOnInit(): void {
       this.reservationsServices.reservationById(this.reservationId).subscribe( ({ reservation }) => {
       this.reservation = reservation;
       console.log(this.reservation)
+
+      
+      this.startDate=new Date(this.reservation.startDate);
+      this.endDate=new Date(this.reservation.endDate);
+
+      this.startDate?.setHours(this.startDate.getHours() + 4);
+      this.endDate?.setHours(this.endDate.getHours() + 4);
+
+      console.log(this.startDate);
+      console.log(this.endDate);
+
       this.salonService.findAll().subscribe(({ salones }) => {
-            this.items = salones.map(salon => salon.name);
-            this.salon=this.items[this.reservation.salonId-1]
-            console.log("salon: ",this.salon)
+            this.salons = salones;
+            //console.log("aquii: ",this.salons[0].name )
+            if(this.reservation){
+                const found = this.salons.find((salon:Salon) => salon.id === this.reservation?.salonId);
+                if(found){
+                   console.log(found)
+                   this.salon=found.name;
+                }
+            }
       }, error => {
             console.error('Error en la solicitud :', error);
+            alert('Error en la solicitud :findAll');
       });
      }, error => {
         console.error('Error en la solicitud :', error);
+        alert('Error en la solicitud :reservationById');
      });
     });
+    this.rol=this.authService.getRol();
 
 
   /*
@@ -70,10 +100,7 @@ ngOnInit(): void {
       })*/
   }
 
-
-buscarStringEnLista(lista: string[], cadena: string): number {
-    return lista.indexOf(cadena);
-  }
+ 
 
 
   changeStatusInReservation(id: number, status: string) {

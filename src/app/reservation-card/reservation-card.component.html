@@ -1,9 +1,12 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
+      <h5 class="card-title">{{ reservation?.user?.name }}</h5>
+      <h5 class="card-title">{{ reservation?.user?.direction?.address }}</h5>
       <h5 class="card-title">{{ reservation?.requerimiento }}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{ reservation?.state }}</h6>
       <p class="card-text">{{ reservation?.descripcion }}</p>
-      <h6>Fecha: {{ reservation?.startDate }}</h6>
+      <h6> {{ startDate | date:'yyyy-MM-dd, h:mm a'}}</h6>
+      <h6> {{ endDate | date:'yyyy-MM-dd, h:mm a'}}</h6>
       <a [routerLink]="['/reservations', reservation?.id]" href="#" class="btn btn-primary">Ver mas...</a>
     </div>
   </div>
