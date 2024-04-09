@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// import { ReservationsService } from '../services/reservations.service';
 import { CommonModule } from '@angular/common';
 import { SideBarReservartionsComponent } from './components/side-bar-reservartions/side-bar-reservartions.component';
 import { RouterModule } from '@angular/router';
