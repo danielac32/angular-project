@@ -37,24 +37,22 @@ export interface ReservationUser {
 }
 
 export interface User {
-    id?:number;
-    name: string;
-    email: string;
-    isActive?: boolean;
-    password?: string;
-    directionId?: number;
-    rol?:string
-    direction?: {
-        id: number;
-        address: string;
-    };
+  id?:number;
+  name: string;
+  email: string;
+  isActive?: boolean;
+  password?: string;
+  directionId?: number;
+  rol?:string
+  direction?: {
+    id: number;
+    address: string;
+  };
 };
 
 export interface ReservationResponse3 {
   reservations: ReservationUser[]
 }
-
-
 
 export interface ReservationWithUser {
   id: number;
@@ -78,9 +76,6 @@ export interface ReservationWithUser {
   };
   userId: number;
 }
-
-
-
 
 export interface ReservationResponse4 {
   reservations: ReservationWithUser[]
