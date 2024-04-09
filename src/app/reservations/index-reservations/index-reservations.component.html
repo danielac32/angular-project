@@ -1,0 +1,17 @@
+<section>
+   
+    <div class="navigation">
+        <button (click)="changeStatusFilter('pending')" class="btn btn-outline-warning">Pendientes</button>
+        <button (click)="changeStatusFilter('accepted')" class="btn btn-outline-success">Aceptadas</button>
+        <button (click)="changeStatusFilter('refused')" class="btn btn-outline-danger">Rechazadas</button>
+    </div>
+
+    <div class="container">
+        @for (reservation of reservations; track reservation.id) {
+            <app-reservation-card
+                class="card"
+                [reservation]="reservation"
+             />
+        }
+    </div>
+</section>
