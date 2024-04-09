@@ -1,18 +1,16 @@
-<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;" >
-<div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
-<h2 class="mb-4 text-center">Crear Usuario</h2>
-<form style="width: 400px;" [formGroup]="myForm" (ngSubmit)="onSubmit()" >
+
+
+<form class="login" [formGroup]="myForm" (ngSubmit)="onSubmit()" >
     
-    <div class="mb-3">
-        <input type="text" formControlName="name" required  placeholder="Nombre" class="form-field">
+        <h2 >Crear Usuario</h2>
+        <input type="text" formControlName="name" required  placeholder="Nombre" >
         @if (myForm.get('name')?.hasError('required')){
             <div class="error-message" >
                 Nombre requerido
             </div>
         }
-    </div>
-    <div class="mb-3">
-        <input type="email" formControlName="email" required  placeholder="Correo electrónico" class="form-field">
+ 
+           <input type="email" formControlName="email" required  placeholder="Correo electrónico" >
         @if (myForm.get('name')?.hasError('required')){
             <div class="error-message" >
                 Nombre requerido
@@ -23,10 +21,9 @@
                 El email ingresado no es válido.
             </div>
          }
-    </div>
-
-    <div class="mb-3">
-        <input type="password" formControlName="password" required  placeholder="Contraseña" class="form-field">
+  
+ 
+        <input type="password" formControlName="password" required  placeholder="Contraseña" >
         @if (myForm.get('password')?.hasError('required')){
             <div class="error-message" >
                 Contraseña requerido
@@ -37,25 +34,23 @@
                 Contraseña menor a 6 caracteres
             </div>
         }
-    </div>
-
-    <div class="mb-3">
-            <select formControlName="selectedItem" >
-                @for (direction of directions; track direction.id) {
-                    <option value="{{ direction.id }}">{{ direction.address }}</option>
-                } @empty {
-                    <option>There are no items.</option>
-                }   
-            </select>
-            @if (myForm.get('selectedItem')?.hasError('required')){
-                <div class="error-message" >
-                    Direccion requerida.
-                </div>
-            }
-   </div>
    
-   <div class="mb-3">
-       <select formControlName="rol">
+        <select formControlName="selectedItem" class = "custom-select" >
+            <option value="" disabled selected>Direcciones</option>
+            @for (direction of directions; track direction.id) {
+                <option value="{{ direction.id }}">{{ direction.address }}</option>
+            } @empty {
+                <option>There are no items.</option>
+            }   
+        </select>
+        @if (myForm.get('selectedItem')?.hasError('required')){
+            <div class="error-message" >
+                Direccion requerida.
+            </div>
+        }
+ 
+       <select formControlName="rol" class = "custom-select" >
+        <option value="" disabled selected>Rol</option>
        <option value="admin">Admin</option>
        <option value="user">User</option>
        </select>
@@ -64,8 +59,6 @@
                 rol requerido.
             </div>
        }
-   </div>
-    <button type="submit" class="btn btn-primary btn-block">Crear</button>
+  
+    <button type="submit" >Crear</button>
 </form>
-</div>
-</div>

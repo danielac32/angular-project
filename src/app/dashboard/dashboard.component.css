@@ -1,15 +1,46 @@
 .dashboard-layout {
   display: flex;
-  flex-direction: column; /* Alinea los elementos en columna */
-  height: 100vh; /* Ocupa toda la altura de la ventana */
+  flex-direction: column; 
 }
 
 .sidebar {
-  border-right: 1px solid #ccc; /* Borde derecho de la barra de navegación */
+  flex: 0 0 80px; /* Ancho fijo de la barra lateral */
+  background-color: #f45b69;
+  color: white;
   padding: 20px;
 }
 
+.nav {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-item {
+  margin-bottom: 10px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
 .content {
-  flex: 1; /* El contenido ocupará todo el espacio restante */
+  flex: 1; /* El contenido se expandirá para ocupar el espacio restante */
   padding: 20px;
+}
+
+.alert {
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.alert-danger {
+  background-color: #f45b69;
+  color: white;
+}
+
+.alert-success {
+  background-color: #28a745;
+  color: white;
 }

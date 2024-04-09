@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
 
     this.rol=this.authService.getRol();
 
-  
+    
     if (this.authService.isLoggedIn()) {
       if (rol && this.rol && rol.length > 0 && !rol.includes(this.rol)) {
          console.log("no puede entrar aqui")

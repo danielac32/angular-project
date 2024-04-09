@@ -1,22 +1,24 @@
 <!------------------------------------------------------------------------------------------------------------------------>
-<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;" >
-<div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
+
 <h2 class="mb-4 text-center">Actualizar</h2>
 
 
 
-<form style="width: 300px;" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
-	<div class="mb-3">
+<form  [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="text-center">
+  <div class="mb-4">
        <select formControlName="rol">
-       <option value="admin">Admin</option>
+       <option value="admin" selected>Admin</option>
        <option value="user">User</option>
        </select>
+ </div>
        @if (updateForm.get('rol')?.hasError('required')){
             <div class="error-message" >
                 rol requerido.
             </div>
        }
-   </div>
+
 	    <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
 </form>
 </div>

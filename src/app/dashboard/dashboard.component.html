@@ -1,17 +1,10 @@
-
-
-<div *ngIf="status==='error'">
-<div class="alert alert-danger" role="alert">
-      {{ message }}
-</div>
+<div *ngIf="status==='error'" class="alert alert-danger" role="alert">
+  {{ message }}
 </div>
 
-<div *ngIf="status==='ok'">
-<div class="alert alert-success" role="alert">
-      {{ message }}
+<div *ngIf="status==='ok'" class="alert alert-success" role="alert">
+  {{ message }}
 </div>
-</div>
-
 
 <div class="dashboard-layout">
   <!-- Barra de navegación -->
@@ -20,30 +13,23 @@
       <li class="nav-item">
         <span class="nav-link">¡Bienvenido, {{ userName }}!</span>
       </li>
-      @if(rol === 'admin'){
-          <li class="nav-item">
-              <a class="nav-link" routerLink="/dashboard/home">Inicio</a>
-          </li>
-      }
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard/home">Inicio</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/dashboard/profile">Perfil</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/dashboard/reservations">Reservaciones</a>
       </li>
-
       <li class="nav-item">
         <a class="nav-link" (click)="logout()">Salir</a>
       </li>
-      
-      <!-- Otros enlaces de navegación -->
     </ul>
   </div>
 
-
-
   <!-- Área de contenido -->
   <div class="content">
-    <router-outlet></router-outlet> <!-- Aquí se cargarán los componentes hijos -->
+    <router-outlet></router-outlet>
   </div>
 </div>

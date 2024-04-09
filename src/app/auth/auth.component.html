@@ -1,10 +1,4 @@
-<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-  <div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
- <h2 class="mb-4 text-center">Iniciar sesión</h2>
-  <form style="width: 300px;" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-
-<div class="mb-3">
+<form class="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <input type="email" formControlName="email" required  placeholder="Correo electrónico" class="form-field">
   <div *ngIf="loginForm.get('email')?.hasError('email')" class="error-message">
       El email ingresado no es válido.
@@ -12,9 +6,6 @@
   <div *ngIf="loginForm.get('email')?.hasError('required')" class="error-message" >
       email requerido
   </div>
- </div>
-
- <div class="mb-3">
   <input type="password"  formControlName="password" required placeholder="Contraseña" class="form-field">
   <div *ngIf="loginForm.get('password')?.hasError('required')">
       contraseña requerida
@@ -22,9 +13,7 @@
   <div *ngIf="loginForm.get('password')?.hasError('minlength')">
         contraseña menor a 6 caracteres
   </div>
-   </div>
-  <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
-  </form>
-  <button (click)="onClick()" class="btn btn-primary btn-block">Olvide mi clave..</button>
-</div>
-</div>
+  <button (click)="onClick()">Login</button>
+</form>
+
+<!--<a href="https://codepen.io/davinci/" target="_blank">check my other pens</a>-->

@@ -1,7 +1,7 @@
   <button type="submit" class="btn btn-primary btn-block" (click)="handleClick()">volver</button>
-  <div>
-        <table class="table">
-            <thead class="thead-dark">
+<div >
+  <table >
+    <thead >
               <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -15,24 +15,26 @@
             </thead>
          
             <tbody >
-        @for (user of users; track user.id) {
-              <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.isActive ? 'Si' : 'No' }}</td>
-                <!--<td>{{ user.password }}</td>-->
-                <td>{{ user.direction?.address }}</td>
-                <td>{{ user.rol}}</td>
-                  @if (user.isActive === true){
-                      <td><a class="nav-link" (click)="desactivar(user?.email)">Desactivar</a></td>
-                  }
-                  @else{
-                      <td><a class="nav-link" (click)="activar(user?.email)">Activar</a></td>
-                  }
-                  <td><a class="nav-link" (click)="editar(user?.email)">Editar</a></td>
-              </tr>
-        }
+            @for (user of users; track user.id) {
+                  <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.isActive ? 'Si' : 'No' }}</td>
+                    <!--<td>{{ user.password }}</td>-->
+                    <td>{{ user.direction?.address }}</td>
+                    <td>{{ user.rol}}</td>
+                    <td>
+                      @if (user.isActive === true){
+                          <a class="nav-link" (click)="desactivar(user?.email)">Desactivar</a>
+                      }
+                      @else{
+                          <a class="nav-link" (click)="activar(user?.email)">Activar</a>
+                      }
+                      <a class="nav-link" (click)="editar(user?.email)">Editar</a>
+                      </td>
+                  </tr>
+            }
             </tbody>
         </table>
 

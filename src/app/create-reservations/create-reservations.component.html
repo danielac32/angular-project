@@ -1,11 +1,9 @@
-<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;" >
-<div class="card p-4" style="width: 300px; border-radius: 10px; border: 1px solid #ccc;">
-<form style="width: 400px;" [formGroup]="myForm" (ngSubmit)="createReservation()">
-   <div class="mb-3">
+
+<form  class="login" [formGroup]="myForm" (ngSubmit)="createReservation()">
     <input
         formControlName="requerimiento"
         type="text"
-        required  placeholder="Requerimiento" class="form-field" 
+        required  placeholder="Requerimiento" 
     />
     @if (myForm.get('requerimiento')?.hasError('required')){
         <div class="error-message" >
@@ -13,13 +11,11 @@
         </div>
     }
 
- </div>
- <div class="mb-3">
+
     <input
         formControlName="startDate"
         type="datetime-local"
         required 
-        class="form-field" 
         (input)="convertTimeStart()"
         
 />
@@ -29,15 +25,10 @@
             Fecha requerida
         </div>
     }
- </div>
- <div class="mb-3">
-
-
     <input
         formControlName="endDate"
         type="datetime-local"
         required  
-        class="form-field" 
        (input)="convertTimeEnd()"
     />
     <label>{{endTime}}</label>
@@ -46,34 +37,30 @@
             Fecha requerida
         </div>
     }
- </div>
- <div class="mb-3">
+
     <input
         formControlName="cantidad_persona"
         type="number"
-        required  placeholder="Cantidad de persona" class="form-field" 
+        required  placeholder="Cantidad de persona"
     />
     @if (myForm.get('cantidad_persona')?.hasError('required')){
         <div class="error-message" >
             Cantidad de personas requerida
         </div>
     }
- </div>
- <div class="mb-3">
+
     <input
         formControlName="descripcion"
         type="text"
-        required  placeholder="Descripcion" class="form-field" 
+        required  placeholder="Descripcion" 
     />
     @if (myForm.get('descripcion')?.hasError('required')){
         <div class="error-message" >
             Descripcion requerida
         </div>
     }
- </div>
 
- <div class="mb-3">
-    <select formControlName="selectedItem" >
+    <select formControlName="selectedItem" class = "custom-select">
         @for (salon of salons; track salon.id) {
             <option value="{{ salon.id }}">{{ salon.name }}</option>
         } @empty {
@@ -85,10 +72,8 @@
             Descripcion requerida
         </div>
     }
- </div>
+
  
 
-    <button type="submit" class="btn btn-primary btn-block">Crear</button>
+    <button type="submit">Crear</button>
   </form>
-</div>
-</div>
