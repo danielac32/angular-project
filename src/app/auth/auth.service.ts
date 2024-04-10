@@ -14,10 +14,14 @@ import {CreateUser} from "./create-user/create-user.interface"
 export class AuthService {
  private baseUrl = 'http://localhost:4000';
  person: UserUpdate | null = null;
-
+ 
 
   constructor(private httpClient: HttpClient,private router: Router) { }
   
+
+  deleteUser():void{
+    
+  }
   updateRol(email:string,rol:string):Observable<UserResponse>{
       const token = localStorage.getItem('accessToken');
       if (token) {
