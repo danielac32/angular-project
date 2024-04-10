@@ -1,29 +1,30 @@
 .sub-nav {
-    display: flex;
-  }
-  
-  .sidebar {
-    flex: 0 0 250px; /* Ancho fijo de la barra lateral */
-    background-color: #f45b69;
-    color: white;
-    padding: 20px;
-  }
-  
-  .nav {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .nav-item {
-    margin-bottom: 10px;
-  }
-  
-  .nav-link {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .content {
-    flex: 1; /* El contenido se expandirá para ocupar el espacio restante */
-    padding: 20px;
-  }
+  display: flex;
+}
+
+.sidebar {
+  flex: 0 0 250px; /* Ancho fijo de la barra lateral */
+  background-color: #f45b69;
+  color: white;
+  padding: 20px;
+  align-self: flex-start; /* Alinea la barra lateral hacia arriba */
+}
+
+.nav {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-item {
+  margin-bottom: 10px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.content {
+  flex: 1; /* El contenido se expandirá para ocupar el espacio restante */
+  padding: 20px;
+}

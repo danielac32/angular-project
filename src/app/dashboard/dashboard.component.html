@@ -6,32 +6,34 @@
   {{ message }}
 </div>
 
-<div class="dashboard-layout">
-  <!-- Barra de navegación -->
-  <div class="sidebar">
-    <ul class="nav">
-      <li class="nav-item">
-        <span class="nav-link">¡Bienvenido, {{ userName }}!</span>
+<nav>
+  <div class="wrapper">
+    <div class="logo"><a href="#">Logo</a></div>
+    <input type="radio" name="slider" id="menu-btn">
+    <input type="radio" name="slider" id="close-btn">
+    <ul class="nav-links">
+      <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+       @if(rol === "ADMIN"){
+          <li>
+            <a routerLink="/dashboard/home">Inicio</a>
+          </li>
+       }
+      <li>
+        <a routerLink="/dashboard/profile">Perfil</a>
       </li>
-      @if(rol === "ADMIN"){
-       <li class="nav-item">
-        <a class="nav-link" routerLink="/dashboard/home">Inicio</a>
+      
+      <li>
+        <a  routerLink="/dashboard/reservations">Reservaciones</a>
       </li>
-    }
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/dashboard/profile">Perfil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/dashboard/reservations">Reservaciones</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logout()">Salir</a>
+      <li>
+        <a  (click)="logout()">Salir</a>
       </li>
     </ul>
+    <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
   </div>
+</nav>
 
-  <!-- Área de contenido -->
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
+<div class="body-text">
+  <!--<div class="title">Responsive Dropdown and Mega Menu</div>
+  <div class="sub-title">using only HTML & CSS</div>-->
 </div>
