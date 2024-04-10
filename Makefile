@@ -4,7 +4,7 @@
 default: help
 
 # Objetivo para agregar, confirmar y enviar cambios a Git
-commit-and-push:
+commit:
 	@read -p "Enter your commit message: " MESSAGE; \
 	git add .; \
 	git commit -m "$$MESSAGE"; \
@@ -15,6 +15,14 @@ help:
 	@echo "Uso: make <comando>"
 	@echo ""
 	@echo "Comandos disponibles:"
-	@echo "  commit-and-push  Agrega, confirma y envía los cambios a Git (requiere ingresar un mensaje de confirmación)"
+	@echo "  commit  Agrega, confirma y envía los cambios a Git (requiere ingresar un mensaje de confirmación)"
 
-.PHONY: help commit-and-push
+install:
+	npm install --force
+
+run:
+	ng serve
+
+pull:
+	git pull
+.PHONY: help commit install run pull
