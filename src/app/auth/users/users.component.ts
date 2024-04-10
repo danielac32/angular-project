@@ -64,6 +64,13 @@ constructor(private route: ActivatedRoute,private router: Router,private authSer
       }
   }
 
+  eliminar(id?:string){
+      if (id !== undefined) {
+         this.router.navigate(['/users/editar'],{ queryParams: { parametro: id ,parametro2:"delete"} });
+      }
+  }
+
+
 
   activar(id?: string) {
     if (id !== undefined) {

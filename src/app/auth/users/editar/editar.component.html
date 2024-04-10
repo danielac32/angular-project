@@ -9,8 +9,9 @@
 <form  [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="text-center">
   <div class="mb-4">
        <select formControlName="rol">
-       <option value="admin" selected>Admin</option>
-       <option value="user">User</option>
+        <option value="" disabled selected>Rol</option>
+       <option value="ADMIN" selected>Admin</option>
+       <option value="USER">User</option>
        </select>
  </div>
        @if (updateForm.get('rol')?.hasError('required')){
@@ -21,5 +22,6 @@
 
 	    <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
 </form>
+
 </div>
 </div>

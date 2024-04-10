@@ -11,5 +11,4 @@ import { RouterLink } from '@angular/router';
   styleUrl: './side-bar-reservartions.component.css'
 })
 export class SideBarReservartionsComponent {
-
 }

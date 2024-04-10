@@ -6,7 +6,7 @@
         <p>Fecha de inicio: {{ startDate | date:'yyyy-MM-dd, h:mm a' }}</p>
         <p>Fecha de finalizacion: {{ endDate | date:'yyyy-MM-dd, h:mm a' }}</p>
         <p>Requerimiento: {{reservation.requerimiento}}</p>
-        @if (rol === "admin"){
+        @if (rol === "ADMIN"){
                 <button (click)="changeStatusInReservation(reservation.id, 'accepted')" class="btn btn-primary">Aceptar</button>
                 <button (click)="changeStatusInReservation(reservation.id, 'refused')" class="btn btn-outline-danger">Rechazar</button>
                 <button class="btn btn-outline-success" (click)="goBack()">Volver...</button>

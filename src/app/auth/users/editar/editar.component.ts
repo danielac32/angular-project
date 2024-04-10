@@ -36,6 +36,10 @@ export class EditarComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const parametro = params['parametro'];
+      if(params['parametro2']==='delete'){
+         console.log("eliminar: ",parametro)
+
+      }
       this.idUser=parametro;
       //console.log('Parámetro recibido:', parametro);
     });
@@ -44,7 +48,9 @@ export class EditarComponent implements OnInit {
   onSubmit(): void {
         if(this.updateForm.valid && this.idUser !== undefined){
            const rol = this.updateForm.get('rol')!.value;
-       
+           
+
+           console.log("editar: ",rol)
            this.authService.updateRol(this.idUser,rol).subscribe(response => {
 
            }, error => {

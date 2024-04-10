@@ -17,8 +17,8 @@ import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
    { path: 'login', component: AuthComponent }, // Ruta para el componente de autenticación
-   { path: 'dashboard', component: DashboardComponent, /*canActivate: [AuthGuard], */children: [
-	    { path: 'home', component: HomeComponent, data: { rol:'admin' } },
+   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],children: [
+	    { path: 'home', component: HomeComponent, data: { rol:'ADMIN' } },
 	    { path: 'profile', component: ProfileComponent },
 	    { path: 'reservations', component: ReservationsComponent, children:[
 			{ path: 'reservations', component: IndexReservationsComponent },
@@ -28,9 +28,9 @@ export const routes: Routes = [
   ]},
   { path: 'reservations/:id', component: ReservationScreenComponent },
   { path: 'create-user', component: CreateUserComponent, canActivate: [AuthGuard] },
-  { path: 'users', component: UsersComponent,canActivate: [AuthGuard], data: { rol:'admin' },children:[
-  		{path: 'editar', component: EditarComponent,canActivate: [AuthGuard], data: { rol:'admin' }}
-  		]},
+  { path: 'users', component: UsersComponent,canActivate: [AuthGuard], data: { rol:'ADMIN' },children:[
+  		{path: 'editar', component: EditarComponent,/*canActivate: [AuthGuard],*/ data: { rol:'ADMIN' }}
+  ]},
   { path: '', redirectTo: '/login', pathMatch: 'full' } // Redirige a la página de inicio al componente de autenticación
 
 ];

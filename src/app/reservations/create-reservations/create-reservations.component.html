@@ -61,6 +61,7 @@
     }
 
     <select formControlName="selectedItem" class = "custom-select">
+        <option value="" disabled selected>Salón</option>
         @for (salon of salons; track salon.id) {
             <option value="{{ salon.id }}">{{ salon.name }}</option>
         } @empty {

@@ -51,8 +51,8 @@
  
        <select formControlName="rol" class = "custom-select" >
         <option value="" disabled selected>Rol</option>
-       <option value="admin">Admin</option>
-       <option value="user">User</option>
+       <option value="ADMIN">Admin</option>
+       <option value="USER">User</option>
        </select>
        @if (myForm.get('rol')?.hasError('required')){
             <div class="error-message" >

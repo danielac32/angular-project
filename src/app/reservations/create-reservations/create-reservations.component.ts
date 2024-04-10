@@ -140,6 +140,10 @@ convertTimeEnd(): void {
             (startDate <= existingStartDate && endDate >= existingEndDate)   // Contiene completamente la reserva existente
         ) {
             // Se ha encontrado una superposición, devolver verdadero
+            console.log("reservacion existente:")
+            console.log(existingStartDate)
+            console.log(existingEndDate)
+            console.log(reservation.user)
             return true;
         }
     }
