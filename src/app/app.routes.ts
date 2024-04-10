@@ -21,8 +21,8 @@ export const routes: Routes = [
 	    { path: 'home', component: HomeComponent, data: { rol:'ADMIN' } },
 	    { path: 'profile', component: ProfileComponent },
 	    { path: 'reservations', component: ReservationsComponent, children:[
-			{ path: 'reservations', component: IndexReservationsComponent },
-			{ path: 'create', component: CreateReservationsComponent },
+    			{ path: 'reservations', component: IndexReservationsComponent },
+    			{ path: 'create', component: CreateReservationsComponent },
 	    ]}
     // Otros componentes del dashboard
   ]},
